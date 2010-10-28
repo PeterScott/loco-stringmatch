@@ -105,6 +105,8 @@ int kmp_search3(char *haystack, size_t haystack_len) {
 int kmp_search_inl(char *haystack, size_t haystack_len) {
   int64_t haystack_pos;
 
+  asm ("nop\n\tnop\n\tnop\n\tnop\n\tnop\n\tnop\n\t");
+
   asm ("xorq %%rax, %%rax\n\t"
        "xorq %1, %1\n\t"
        "jmp 0f\n\t"
@@ -198,5 +200,6 @@ int kmp_search_inl(char *haystack, size_t haystack_len) {
        : "%rax"			/* clobber list */
        );
 
+  asm ("nop\n\tnop\n\tnop\n\tnop\n\tnop\n\tnop\n\t");
   return haystack_pos;
 }
